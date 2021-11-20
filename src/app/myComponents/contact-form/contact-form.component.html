@@ -1,0 +1,104 @@
+<div class="form-content">
+   <form class="form" #contactForm="ngForm" novalidate>
+      <div class="form-head-content">
+         Person Address Form
+         <div class="form-logo-content">
+            <mat-icon class="cancel-icon" routerLink="">cancel</mat-icon>
+         </div>
+      </div>
+
+      <!-- <full name> -->
+      <div class="row-content">
+         <mat-label class="label text" for="fullName">Full Name</mat-label>
+            <input class="input" type="text" name="fullName" #fullName="ngModel" [(ngModel)]="contact.fullName" required minlength="4" placeholder="">
+            <div *ngIf="!fullName.valid && (fullName.dirty || fullName.touched)" class="error-output">
+               <div *ngIf="fullName.errors?.['required']">
+                  * Required Field
+               </div>
+               <div *ngIf="fullName.errors?.['minlength']">
+                  Minimum Length is 4
+               </div>
+            </div>
+      </div>
+
+      <!-- <phone number> -->
+      <div class="row-content">
+         <mat-label class="label text" for="phone">Phone Number</mat-label>
+         <input class="input" type="text" name="phone" #phone="ngModel" [(ngModel)]="contact.phone" required minlength="10" placeholder="">
+         <div *ngIf="!phone.valid && (phone.dirty || phone.touched)" class="error-output">
+            <div *ngIf="phone.errors?.['required']">
+               * Required Field
+            </div>
+            <div *ngIf="phone.errors?.['minlength']">
+               Minimum Length is 10
+            </div>
+         </div>
+      </div>
+
+      <!-- <address> -->
+      <div class="row-content">
+         <mat-label class="label text" for="address">Address</mat-label>
+         <textarea class="input address" name="Address" #address="ngModel" [(ngModel)]="contact.address" required placeholder=""></textarea>
+         <div *ngIf="!address.valid && (address.dirty || address.touched)" class="error-output">
+            <div *ngIf="address.errors?.['required']">
+               * Required Field
+            </div>
+         </div>
+      </div>
+
+      <!-- <city, state, zip code> -->
+      <div class="row-content-exp">
+
+         <!-- <city> -->
+         <div class="oneRow-content">
+            <mat-label class="label text" for="city">City</mat-label>
+            <select class="select-input" name="city" #city="ngModel" [(ngModel)]="contact.city" required>
+              
+               <option *ngFor="let city of cityList" [value]="city.value">{{city.value}}</option>
+            </select>
+            <div *ngIf="!city.valid && (city.dirty || city.touched)" class="error-output">
+               <div *ngIf="city.errors?.['required']">
+                  * Required Field
+               </div>
+            </div>
+         </div>
+
+         <!-- <state> -->
+         <div class="oneRow-content">
+            <mat-label class="label text" for="state">State</mat-label>
+            <select class="select-input" name="state" #state="ngModel" [(ngModel)]="contact.state" required >
+               <option disabled>Select State</option>
+               <option *ngFor="let state of stateList" [value]="state.value">{{state.value}}</option>
+            </select>
+            <div *ngIf="!state.valid && (state.dirty || state.touched)" class="error-output">
+               <div *ngIf="state.errors?.['required']">
+                  * Required Field
+               </div>
+            </div>
+         </div>
+
+         <!-- <zip code> -->
+         <div class="oneRow-content">
+            <mat-label class="label text" for="zipCode">Zip Code</mat-label>
+            <input class="zipCode" type="text" name="zipCode" #zipCode="ngModel" [(ngModel)]="contact.zipCode" required minlength="6" maxlength="6">
+            <div *ngIf="!zipCode.valid && (zipCode.dirty || zipCode.touched)" class="error-output">
+               <div *ngIf="zipCode.errors?.['required']">
+                  * Required Field
+               </div>
+               <div *ngIf="zipCode.errors?.['minlength']">
+                  Required length is 6 digits
+               </div>
+               <div *ngIf="zipCode.errors?.['maxlength']">
+                  Required length is 6
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- <add button and reset button> -->
+      <div class="submit-reset">
+         <button type="submit" class="button " mat-raised-button [disabled]="!contactForm.valid" (click)="postContact()" routerLink="">Add</button>
+         <button type="button" onclick="resetForm()" class="resetButton button">Reset</button>
+      </div>
+   </form>
+</div>

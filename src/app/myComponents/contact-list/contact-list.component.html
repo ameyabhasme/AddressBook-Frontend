@@ -1,0 +1,47 @@
+<div class="main-content">
+   <div class="header-content">
+      <div class="person-detail-text">
+         Person Details
+      </div>
+      
+      <!-- <Add Button> -->
+      <div>
+         <button class="add-button" routerLink="contactform">
+            <mat-icon class=" add-icon " alt="Add icon">add</mat-icon>
+            <span>Add Person</span>
+         </button>
+      </div>
+   </div>
+   <div id="table-main" class="table-main">
+      <table id="table-display" class="table">
+         <thead>
+            <tr>
+               <th>Fullname</th>
+               <th>Address</th>
+               <th>City</th>
+               <th>State</th>
+               <th>Zip Code</th>
+               <th>Phone Number</th>
+               <th> </th>
+            </tr>
+         </thead>
+         <tbody class="table-detail">
+            <tr *ngFor="let contact of contacts">
+
+               <td> {{contact.fullName}}</td>
+               <td> {{contact.address}}</td>
+               <td>{{contact.city}}</td>
+               <td>{{contact.state}}</td>
+               <td> {{contact.zipCode}}</td>
+               <td>{{contact.phone}}</td>
+               <td>
+                  <div class="actions-icons">
+                     <mat-icon (click)="deleteContact(contact.id)">delete</mat-icon>
+                     <mat-icon>create</mat-icon>
+                  </div>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>
